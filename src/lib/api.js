@@ -5,7 +5,7 @@
    Single point of contact with the backend.
    ======================================================== */
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://129.121.39.128:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.sbacem.com.br';
 
 /**
  * Upload a ZIP file and return the job ID.
