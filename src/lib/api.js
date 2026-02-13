@@ -5,7 +5,7 @@
    Single point of contact with the backend.
    ======================================================== */
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://129.121.39.128:8080';
 
 /**
  * Upload a ZIP file and return the job ID.
