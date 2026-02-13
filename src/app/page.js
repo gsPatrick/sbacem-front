@@ -235,9 +235,8 @@ export default function Home() {
 
       {/* ─── Footer ─── */}
       <footer className={styles.footer}>
-        <span>Desenvolvido por: </span>
-        <a href="https://www.codebypatrick.dev/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
-          Patrick.Developer
+        <a href="https://figa.app.br" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+          figa.app.br
         </a>
       </footer>
     </div>
