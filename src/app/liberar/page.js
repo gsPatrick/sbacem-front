@@ -4,8 +4,8 @@ import { useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-const HUB_URL = "http://localhost:8000"; // Adjust if needed
-const SATELLITE_API = "http://localhost:8001"; // Satellite 2 is port 8001
+const HUB_URL = "https://api.sbacem.com.br/apicentralizadora";
+const SATELLITE_API = "";
 
 function LiberarContent() {
     const searchParams = useSearchParams();
@@ -21,8 +21,8 @@ function LiberarContent() {
 
         const runHandshake = async () => {
             try {
-                // Call Satellite Backend to validate token & set cookie
-                const res = await fetch(`${SATELLITE_API}/api/liberar?token=${token}&next=${nextPath}`);
+                // Call Satellite Backend via relative path
+                const res = await fetch(`/api/liberar?token=${token}&next=${nextPath}`);
 
                 if (res.ok) {
                     router.push(nextPath);
