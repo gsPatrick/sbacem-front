@@ -1,4 +1,6 @@
 import '@/styles/globals.css';
+import { SessionExpiredModal } from './SessionExpiredModal';
+import { AuthGuard } from './components/AuthGuard';
 
 export const metadata = {
   title: 'SBACEM Distribution Pro',
@@ -8,7 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <AuthGuard>
+          {children}
+          <SessionExpiredModal />
+        </AuthGuard>
+      </body>
     </html>
   );
 }

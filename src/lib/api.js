@@ -5,7 +5,25 @@
    Single point of contact with the backend.
    ======================================================== */
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.sbacem.com.br';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+
+// --- AUTH INTERCEPTOR ---
+async function fetchWithAuth(url, options = {}) {
+  const res = await fetch(url, {
+    ...options,
+    credentials: 'include', // Ensure cookies are sent
+  });
+
+  if (res.status === 401 || res.status === 403) {
+    // Dispatch event for UI to show Session Expired Modal
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event("session-expired"));
+    }
+    throw new Error("Sessão expirada");
+  }
+
+  return res;
+}
 
 /**
  * Upload a ZIP file and return the job ID.
@@ -20,6 +38,7 @@ export async function uploadZip(file, onProgress) {
     formData.append('file', file);
 
     xhr.open('POST', `${BASE_URL}/api/upload`);
+    xhr.withCredentials = true; // Send cookies
 
     if (onProgress) {
       xhr.upload.addEventListener('progress', (e) => {
@@ -30,7 +49,10 @@ export async function uploadZip(file, onProgress) {
     }
 
     xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
+      if (xhr.status === 401 || xhr.status === 403) {
+        window.dispatchEvent(new Event("session-expired"));
+        reject(new Error("Sessão expirada"));
+      } else if (xhr.status >= 200 && xhr.status < 300) {
         resolve(JSON.parse(xhr.responseText));
       } else {
         reject(new Error(`Upload failed: ${xhr.status}`));
@@ -48,7 +70,7 @@ export async function uploadZip(file, onProgress) {
  * @returns {Promise<object>}
  */
 export async function getJobStatus(jobId) {
-  const res = await fetch(`${BASE_URL}/api/status/${jobId}`);
+  const res = await fetchWithAuth(`${BASE_URL}/api/status/${jobId}`);
   if (!res.ok) throw new Error(`Status check failed: ${res.status}`);
   return res.json();
 }
