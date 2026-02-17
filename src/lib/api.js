@@ -5,7 +5,7 @@
    Single point of contact with the backend.
    ======================================================== */
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.sbacem.com.br';
 
 // --- AUTH INTERCEPTOR ---
 async function fetchWithAuth(url, options = {}) {
