@@ -217,7 +217,7 @@ export default function Home() {
 
               <div className={styles.dlStack}>
                 <a href={getPdfsUrl(jobId)} className={styles.dlPrimary} download>
-                  <FileDown size={18} strokeWidth={1.8} /> Baixar Relatórios (ZIP)
+                  <FileDown size={18} strokeWidth={1.8} /> Baixar Relatório (PDF)
                 </a>
                 <a href={getConsolidatedUrl(jobId)} className={styles.dlSecondary} download>
                   <FileSpreadsheet size={18} strokeWidth={1.8} /> Baixar Consolidado

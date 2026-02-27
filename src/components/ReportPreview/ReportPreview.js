@@ -13,7 +13,7 @@ export default function ReportPreview({ jobId, status }) {
             <div className={styles.actions}>
                 <a href={getPdfsUrl(jobId)} className={styles.primaryBtn} download>
                     <FileDown size={18} strokeWidth={1.8} />
-                    Baixar Todos os Relatórios (ZIP)
+                    Baixar Relatório (PDF)
                 </a>
                 <a href={getConsolidatedUrl(jobId)} className={styles.secondaryBtn} download>
                     <FileSpreadsheet size={18} strokeWidth={1.8} />
